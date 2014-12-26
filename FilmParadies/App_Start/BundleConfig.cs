@@ -43,9 +43,7 @@ namespace FilmParadies
                         "~/Content/themes/base/jquery.ui.theme.css"));
 
             bundles.Add(new StyleBundle("~/style/bootstrap").Include(
-                        "~/Content/bootstrap.min.css",
-                        "~/Content/bootstrap-theme.css",
-                        "~/Content/bootstrap-theme.min.css"));
+                        "~/Content/bootstrap*"));
         }
     }
 }
