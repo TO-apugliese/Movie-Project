@@ -1,1 +1,126 @@
-﻿
+﻿/* Custom */
+
+html, body {
+    position:relative;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background-image:url("/Images/BG/symphony.png");
+}
+
+.float-left {
+    float: left;
+}
+
+/* LOGIN */
+
+#login {
+    background-color: #f5f5f5;
+    border-bottom: 3px solid #dfdfdf;
+    height: 35px;
+}
+
+    #login ul {
+        line-height: 35px;
+        padding: 0;
+        margin: 0;
+    }
+ 
+    #login li {
+        list-style: none;
+        display: inline-block;
+        margin-right: 8px;
+    }
+
+        #login li a {
+            color: #000;
+        }
+
+/* HEADER */
+
+header {
+ 
+}
+
+    header.container {
+        background-image: url("http://thumbs.dreamstime.com/z/grunge-scratched-film-strip-reel-background-dirty-35264187.jpg");
+        background-position: center top;
+    }
+
+    header nav {
+        margin: 20px 0;
+    }
+
+    header li {
+        display: inline-block;
+    }
+
+    header #mysearch {
+        border: 2px solid #dfdfdf;
+        border-radius: 8px;
+        height: 40px;
+        margin: 33px;
+        padding: 0 10px;
+        width: 220px;
+    }
+
+        header input#mysearch::-moz-placeholder {
+            font-weight: bold;
+            font-style: italic;
+            color: #b9b9b9;
+        }
+
+
+/* CONTENT BODY */
+
+#body { 
+    padding-bottom: 60px;
+    background-color: #fff;
+    height: 100%;
+}
+
+
+/* FOOTER */
+
+footer {
+    background-color: #f5f5f5;
+    border-top: 3px solid #dfdfdf;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+    footer p {
+        margin: 0;
+        line-height: 35px;
+    }
+
+@media (max-width: 768px) { 
+    .float-right {
+        float: none;
+    }
+}
+
+@media (min-width: @768px) { 
+
+}
+
+@media (min-width: 992px) { 
+    .float-right {
+        float: right;
+    }
+
+    #body {
+        height:inherit;
+        padding: 40px;
+    }
+}
+
+@media (min-width: 1200px) { 
+
+}
+
+

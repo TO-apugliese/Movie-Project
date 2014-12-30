@@ -1,49 +1,91 @@
 ﻿<!DOCTYPE html>
 <html lang="de">
-    <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <meta charset="utf-8" />
-        <title>@ViewBag.Title - Meine ASP.NET MVC-Anwendung</title>
-        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-        <meta name="viewport" content="width=device-width" />
-        @Styles.Render("~/Content/css")
-        @Styles.Render("~/bundles/modernizr")
-        @Styles.Render("~/style/bootstrap")
-    </head>
-    <body>
-        <header class="container">
-            <div class="content-wrapper">
-                <div class="inner">
-                    <p class="site-title">@Html.ActionLink("Ihr Logo hier einfügen", "Index", "Home")</p>
-                </div>
-                <div class="float-right">
-                    <section id="login">
-                        @Html.Partial("_LoginPartial")
-                    </section>
-                    <nav>
-                        <ul id="menu">
-                            <li>@Html.ActionLink("Startseite", "Index", "Home")</li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </header>
-        <div id="body" class="container">
-            @RenderSection("featured", required: false)
-            <section class="content-wrapper main-content clear-fix">
-                @RenderBody()
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - Meine ASP.NET MVC-Anwendung</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/bundles/modernizr")
+    @Styles.Render("~/style/bootstrap")
+</head>
+<body>
+    <div id="login">
+        <div class="inner container">
+            <section class="float-right">
+                @Html.Partial("_LoginPartial")
             </section>
         </div>
-        <footer class="container">
-            <div class="content-wrapper">
+    </div>
+    <header class="container">
+        <div class="content-wrapper">
+            <div class="inner">
+                <!-- LOGO -->
                 <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year - Meine ASP.NET MVC-Anwendung</p>
+                    <input id="mysearch" @*list="test"*@ placeholder="Film Suche" type="search" />
+                    @*<datalist id="test">
+                        <option value="test"></option>
+                    </datalist>*@
+                </div>
+                <div class="float-right">
+                    @Html.Partial("~/Views/Shared/parts/Nav.cshtml")
                 </div>
             </div>
-        </footer>
+        </div>
+    </header>
+    <div id="body" class="container">
+        @RenderSection("featured", required: false)
+        <section class="content-wrapper main-content clear-fix">
+            @RenderBody()
+        </section>
+    </div>
+    <footer class="container-fluid">
+        <div class="content-wrapper">
+            <div class="float-left container">
+                <p>&copy; @DateTime.Now.Year Atnhony Pugliese  - Movie Paradies</p>
+            </div>
+        </div>
+    </footer>
 
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @RenderSection("scripts", required: false)
-    </body>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    @RenderSection("scripts", required: false)
+
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/npm.js"></script>
+    <script>
+        $('#mysearch').change(function () {
+            var baseUrl = 'http://www.omdbapi.com/?t=';
+            var searchTerm = $(this).val().toString();
+            
+            var url = baseUrl + searchTerm;
+
+            movieRequest(url);
+        });
+
+        function movieRequest(url) {
+            $.ajax({
+                url: url,
+                type: 'GET',
+            })
+            .success(function (result) {
+                handleMovieRequest(result);
+            });
+        }
+
+        function handleMovieRequest(result) {
+            var data = JSON.stringify(result);
+            alert(data);
+            $.ajax({
+                type: "POST",
+                url: "Data/ConvertLogInfoToXml",
+                Type: 'text',
+                data: "result=" + data,
+                success: function (r) {
+                    console.log(r);
+                }
+            });
+        }
+    </script>
+</body>
 </html>
